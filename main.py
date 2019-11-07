@@ -22,15 +22,12 @@ tb_logger = SummaryWriter(log_dir=f'./tb_logger/{args.schedule}{args.epoch}')
 
 def train():
     total_loss = 0.
-    sup_count = 0
-    total_sup_loss = 0.
     thres = -1
     for i, unsup_data in enumerate(tqdm(unsup_dataloader)):
         net.train()
         step = epoch * len(unsup_dataloader) + i
         # supervised training
         if i % 6 == 5:
-            sup_count += 1
             try:
                 sup_img, label = next(sup_iter)
             except:
@@ -45,13 +42,13 @@ def train():
 
             # TSA
             if tsa_enable == '1':
-                thres, avg_sup_loss = TSA(label_prob, label, sup_loss, step, schedule=args.schedule, total_step=total_step, start=0.4)
+                thres, avg_sup_loss = TSA(label_prob, label, sup_loss, step, schedule=args.schedule, \
+                                                                        total_step=total_step, start=0.4)
                 
             else:
                 avg_sup_loss = sup_loss
 
             total_loss += avg_sup_loss
-            total_sup_loss += avg_sup_loss
 
             optimizer.zero_grad()
             total_loss.backward()
