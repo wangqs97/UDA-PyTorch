@@ -126,5 +126,5 @@ if __name__ == "__main__":
         scheduler.step()
     
     tb_logger.close()
-    os.remove('temp_label.txt')
+    os.remove('temp_label.pkl')
         
