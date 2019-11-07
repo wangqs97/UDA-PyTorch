@@ -1,4 +1,4 @@
-##UDA experiments with Cifar10
+## UDA experiments with Cifar10
 
 This is an experiment of Google's UDA [[paper\]](https://arxiv.org/abs/1904.12848)[[tensorflow\]](https://github.com/google-research/uda) in pytorch
 
