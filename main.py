@@ -102,6 +102,8 @@ if __name__ == "__main__":
     tsa_enable = args.tsa
     total_epoch = int(args.epoch)
     net = ResNet18().to(DEVICE)
+    if not os.path.exists(f'./model'):
+        os.mkdir('model')
     if os.path.exists(f'./model/{model_name}.pth'):
         load = torch.load(f'./model/{model_name}.pth')
         current_epoch = load['epoch']
